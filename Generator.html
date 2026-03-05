@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Site Generator & Memories</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --pink: #ff75c3; --purple: #9b5de5; --dark-pink: #d81b60; }
+        body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: linear-gradient(135deg, var(--pink), var(--purple)); color: white; overflow-x: hidden; min-height: 100vh; }
+
+        /* --- LOADING AD OVERLAY --- */
+        #ad-loader {
+            position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9);
+            z-index: 5000; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .loader-spin { width: 50px; height: 50px; border: 5px solid #fff; border-top: 5px solid var(--pink); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* --- SETUP FORM --- */
+        #setup-form { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 3000; display: none; justify-content: center; align-items: center; color: #333; overflow-y: auto; }
+        .form-container { max-width: 450px; width: 90%; padding: 30px; background: #fff; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); text-align: center; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .gen-btn { background: var(--dark-pink); color: white; border: none; padding: 15px; border-radius: 50px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 20px; }
+
+        /* --- MAIN SITE --- */
+        #main-site-content { display: none; }
+        #cover-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a1a; z-index: 1000; display: flex; justify-content: center; align-items: center; transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1); }
+        .polaroid { background: white; padding: 15px 15px 50px 15px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); transform: rotate(-2deg); cursor: pointer; text-align: center; }
+        .pol-img { width: 280px; height: 320px; object-fit: cover; border: 1px solid #eee; }
+        .reveal-active { transform: translateY(-100%); }
+
+        /* --- SHARE MENU MODAL --- */
+        #share-modal {
+            position: fixed; bottom: -100%; left: 0; width: 100%; background: white; 
+            border-radius: 30px 30px 0 0; z-index: 4000; transition: 0.5s; padding: 40px 20px;
+            color: #333; text-align: center; box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+        }
+        .modal-active { bottom: 0 !important; }
+        .support-btn { background: #FFDD00; color: black; padding: 15px 30px; border-radius: 10px; text-decoration: none; font-weight: bold; display: block; margin: 10px auto; width: 80%; }
+        .ad-btn { background: #eee; color: #666; padding: 10px; border-radius: 10px; cursor: pointer; display: block; margin: 5px auto; width: 80%; font-size: 0.8rem; border: 1px solid #ccc; }
+
+        /* --- FOOTER / COPYRIGHT --- */
+        footer { margin-top: 50px; padding: 20px; font-size: 0.7rem; opacity: 0.6; }
+
+        /* --- COUNTER & OTHER STYLES --- */
+        #counter-wrapper { display: none; margin: 30px 0; }
+        .counter-container { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); padding: 25px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.2); }
+        .timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+        .timer-unit span { display: block; font-size: 1.8rem; font-weight: 800; }
+        .heart { position: fixed; bottom: -50px; pointer-events: none; animation: float 5s linear infinite; z-index: 999; }
+        @keyframes float { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
+    </style>
+</head>
+<body onclick="triggerFirstRedirect()">
+
+    <div id="ad-loader">
+        <div class="loader-spin"></div>
+        <p>Loading a short ad to support our free service...</p>
+        <p style="font-size: 0.7rem; opacity: 0.7;">Your romantic website is being prepared!</p>
+    </div>
+
+    <div id="setup-form">
+        <div class="form-container">
+            <h2>Love Site Generator</h2>
+            <input type="text" id="in-name" placeholder="Partner's Name *" required>
+            <input type="file" id="in-pic" accept="image/*" required>
+            <input type="text" id="in-nick1" placeholder="Nickname 1">
+            <input type="text" id="in-nick2" placeholder="Nickname 2">
+            <input type="date" id="in-date">
+            <div style="display:flex; gap:10px;"><input type="color" id="in-c1" value="#ff75c3"><input type="color" id="in-c2" value="#9b5de5"></div>
+            <button class="gen-btn" onclick="startGenerateSequence()">Generate Website ✨</button>
+            <p style="font-size: 0.6rem; color: #999; margin-top: 15px;">© 2026 YourProjectName. All Rights Reserved.</p>
+        </div>
+    </div>
+
+    <div id="share-modal">
+        <h3>Share the Love! 💖</h3>
+        <p style="font-size: 0.9rem;">To get your permanent link, please support us:</p>
+        <a href="https://www.buymeacoffee.com/YOUR_USER" target="_blank" class="support-btn">☕ Support me (Instant Link)</a>
+        <p>OR</p>
+        <div class="ad-btn" onclick="watchAdToShare()">Watch 2 ads to get it for free</div>
+        <button onclick="closeShareMenu()" style="border:none; background:none; color: #999; margin-top: 15px; cursor:pointer;">Close</button>
+    </div>
+
+    <div id="main-site-content">
+        <div id="cover-overlay" onclick="startEverything()">
+            <div class="polaroid">
+                <img id="pol-img-display" class="pol-img" src="" alt="Us">
+                <p id="pol-name">For [Name], My Everything</p>
+                <small style="color: #888;">(Click to open)</small>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <h1 id="greeting">I Love You</h1>
+            <p>Dearest <strong id="nick-display">Partner</strong>...</p>
+
+            <div id="counter-wrapper">
+                <div class="counter-container"><div class="timer">
+                    <div class="timer-unit"><span id="d">0</span> Days</div>
+                    <div class="timer-unit"><span id="h">0</span> Hrs</div>
+                    <div class="timer-unit"><span id="m">0</span> Mins</div>
+                    <div class="timer-unit"><span id="s">0</span> Secs</div>
+                </div></div>
+            </div>
+
+            <div onclick="toggleNote()" style="background:white; color:#333; padding:20px; border-radius:15px; cursor:pointer;">
+                <h3 id="note-title">💌 A Private Note...</h3>
+                <div id="note-content" style="display:none; margin-top:10px;"></div>
+            </div>
+
+            <button onclick="openShareMenu()" id="creator-share-btn" style="margin-top: 30px; background:white; color:var(--dark-pink); border:none; padding:10px 20px; border-radius:20px; font-weight:bold; cursor:pointer;">🔗 Share with Partner</button>
+
+            <footer>
+                <p>© 2026 YourProjectName. This template is protected by copyright. Unauthorized copying is prohibited.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        let redirectTriggered = false;
+        const p = new URLSearchParams(window.location.search);
+
+        window.onload = () => {
+            if (p.has('n')) {
+                loadSiteFromURL();
+                document.getElementById('creator-share-btn').style.display = 'none'; // Hide share btn for partner
+            } else {
+                document.getElementById('setup-form').style.display = 'flex';
+            }
+        };
+
+        // MONETIZATION: FIRST CLICK REDIRECT
+        function triggerFirstRedirect() {
+            if (!redirectTriggered) {
+                // window.open('https://your-ad-network-link.com', '_blank'); // Uncomment when you have an ad link
+                console.log("Ad Redirect Triggered");
+                redirectTriggered = true;
+            }
+        }
+
+        // MONETIZATION: GENERATE SEQUENCE
+        function startGenerateSequence() {
+            const name = document.getElementById('in-name').value;
+            const file = document.getElementById('in-pic').files[0];
+            if (!name || !file) return alert("Name and Photo are required!");
+
+            document.getElementById('ad-loader').style.display = 'flex';
+            
+            // Wait 6 seconds (Simulation of Ad Loading)
+            setTimeout(() => {
+                document.getElementById('ad-loader').style.display = 'none';
+                processUpload();
+            }, 6000);
+        }
+
+        function processUpload() {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                const base64Img = reader.result.split(',')[1];
+                const params = new URLSearchParams(window.location.search);
+                params.set('n', document.getElementById('in-name').value);
+                params.set('nk1', document.getElementById('in-nick1').value || 'Love');
+                params.set('d', document.getElementById('in-date').value);
+                params.set('c1', document.getElementById('in-c1').value.replace('#',''));
+                
+                sessionStorage.setItem('temp_img', reader.result);
+                window.history.pushState({}, '', '?' + params.toString());
+                loadSiteFromURL();
+            }
+            reader.readAsDataURL(document.getElementById('in-pic').files[0]);
+        }
+
+        function watchAdToShare() {
+            alert("Playing Ad 1 of 2...");
+            // Trigger Ad Script Here
+            setTimeout(() => {
+                alert("Playing Ad 2 of 2...");
+                // Trigger Ad Script Here
+                setTimeout(() => {
+                    navigator.clipboard.writeText(window.location.href);
+                    alert("Ads watched! Link copied to clipboard.");
+                }, 2000);
+            }, 2000);
+        }
+
+        function loadSiteFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            const n = params.get('n');
+            document.getElementById('pol-name').innerText = `For ${n}, My Everything`;
+            document.getElementById('greeting').innerText = `I Love You, ${n}!`;
+            document.getElementById('note-content').innerText = `To ${n}: You are my world.`;
+            
+            const date = params.get('d');
+            if(date) { 
+                document.getElementById('counter-wrapper').style.display = 'block';
+                startCounter(date);
+            }
+
+            const img = sessionStorage.getItem('temp_img');
+            if(img) document.getElementById('pol-img-display').src = img;
+
+            document.getElementById('setup-form').style.display = 'none';
+            document.getElementById('main-site-content').style.display = 'block';
+        }
+
+        function openShareMenu() { document.getElementById('share-modal').classList.add('modal-active'); }
+        function closeShareMenu() { document.getElementById('share-modal').classList.remove('modal-active'); }
+
+        // Your original functions remain the same
+        function startEverything() { document.getElementById('cover-overlay').classList.add('reveal-active'); }
+        function toggleNote() { const n = document.getElementById('note-content'); n.style.display = n.style.display==='none'?'block':'none'; }
+        function startCounter(d) {
+            setInterval(() => {
+                const diff = Math.abs(new Date().getTime() - new Date(d).getTime());
+                document.getElementById('d').innerText = Math.floor(diff/86400000);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
