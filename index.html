@@ -16,51 +16,45 @@
 
         body, html { margin: 0; padding: 0; font-family: 'Poppins', sans-serif; background: var(--dark); color: white; overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* --- ANIMATIONS --- */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
 
-        /* --- LANDING PAGE --- */
         .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: radial-gradient(circle at center, #2c0707 0%, #0a0a0a 100%); padding: 20px; }
-        .hero h1 { font-family: 'Dancing Script'; font-size: 5.5rem; color: var(--accent); margin: 0; animation: fadeIn 1s ease-out; text-shadow: 0 0 20px rgba(255, 45, 117, 0.5); }
-        .hero p { max-width: 500px; font-size: 1.1rem; color: #ccc; margin: 15px 0 30px; animation: fadeIn 1.5s ease-out; }
+        .hero h1 { font-family: 'Dancing Script'; font-size: 5rem; color: var(--accent); margin: 0; animation: fadeIn 1s ease-out; }
         
         .cta-btn { background: var(--accent); color: white; padding: 18px 45px; border-radius: 50px; text-decoration: none; font-weight: 600; cursor: pointer; border: none; font-size: 1rem; transition: 0.3s; animation: pulse 2s infinite; }
-        .cta-btn:hover { background: #ff0055; transform: scale(1.1); box-shadow: 0 0 30px var(--accent); }
+        .cta-btn:hover { background: #ff0055; transform: scale(1.05); }
 
-        /* --- PRICING CARDS --- */
         .pricing-section { padding: 100px 20px; }
         .pricing-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; }
-        .card { background: var(--glass); backdrop-filter: blur(10px); padding: 40px; border-radius: 30px; width: 300px; text-align: center; border: 1px solid rgba(255,255,255,0.1); transition: 0.4s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-10px); background: rgba(255, 255, 255, 0.15); }
+        .card { background: var(--glass); backdrop-filter: blur(10px); padding: 40px; border-radius: 30px; width: 280px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
         .price { font-size: 3rem; font-weight: 700; color: var(--accent); }
 
-        /* --- FORM --- */
         #setup-section { padding: 80px 20px; display: flex; justify-content: center; }
-        .form-container { width: 100%; max-width: 450px; background: white; color: black; border-radius: 30px; padding: 40px; box-shadow: 0 0 50px rgba(255, 45, 117, 0.2); }
-        input, select { width: 100%; padding: 16px; margin: 12px 0; border: 1px solid #eee; border-radius: 12px; font-family: inherit; }
+        .form-container { width: 100%; max-width: 450px; background: white; color: black; border-radius: 30px; padding: 40px; }
+        input { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; }
 
-        /* --- FINAL ROMANTIC PAGE --- */
+        /* Approval Screen */
+        #approval-screen { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: #000; z-index: 50000; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; }
+
         #final-memory-site { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 10000; background: var(--pro-gradient); overflow-y: auto; }
-        #cover-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 11000; display: flex; justify-content: center; align-items: center; transition: 1.5s cubic-bezier(0.8, 0, 0.2, 1); }
+        #cover-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 11000; display: flex; justify-content: center; align-items: center; transition: 1.5s ease; }
         
-        .polaroid { background: white; padding: 15px 15px 70px 15px; box-shadow: 0 40px 100px rgba(0,0,0,0.8); transform: rotate(-3deg); text-align: center; color: #1a1a1a; cursor: pointer; animation: float 4s ease-in-out infinite; }
-        .pol-img { width: 280px; height: 320px; object-fit: cover; filter: sepia(0.2); }
+        .polaroid { background: white; padding: 15px 15px 60px 15px; transform: rotate(-3deg); text-align: center; color: #1a1a1a; cursor: pointer; animation: float 4s infinite; }
+        .pol-img { width: 250px; height: 300px; object-fit: cover; }
 
-        .memory-content { display: flex; flex-direction: column; align-items: center; padding: 100px 20px; text-align: center; animation: fadeIn 2s ease-in; }
-        .timer-container { display: flex; gap: 15px; margin: 40px 0; }
-        .timer-box { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.2); min-width: 80px; }
-        .timer-box span { display: block; font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+        .memory-content { display: flex; flex-direction: column; align-items: center; padding: 100px 20px; text-align: center; }
+        .timer-container { display: flex; gap: 10px; margin: 30px 0; }
+        .timer-box { background: rgba(255,255,255,0.1); padding: 15px; border-radius: 15px; min-width: 70px; }
+        .timer-box span { display: block; font-size: 2rem; color: var(--accent); }
 
-        .glass-note { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); padding: 40px; border-radius: 30px; max-width: 550px; border: 1px solid rgba(255,255,255,0.1); line-height: 1.8; font-size: 1.1rem; box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .glass-note { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; max-width: 500px; border: 1px solid rgba(255,255,255,0.1); }
 
-        /* --- EXPIRY & PAY --- */
-        #expiry-screen { position: fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:20000; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:30px; }
-        .pay-btn { background: #5a32a8; color: white; padding: 15px 40px; border-radius: 15px; text-decoration: none; font-weight: bold; margin-top: 20px; display: inline-block; font-size: 1.1rem; }
+        #expiry-screen { position: fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:20000; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; }
 
-        .heart { position: fixed; bottom: -50px; animation: floatUp 8s linear infinite; pointer-events: none; opacity: 0.6; }
-        @keyframes floatUp { 100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; } }
+        .heart { position: fixed; bottom: -50px; animation: floatUp 6s linear infinite; pointer-events: none; }
+        @keyframes floatUp { 100% { transform: translateY(-110vh); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -68,85 +62,74 @@
     <div id="landing-page">
         <section class="hero">
             <h1>EverLove Pro</h1>
-            <p>Premium Digital Surprises for your Soulmate. Experience a memory that never fades.</p>
+            <p>Premium Digital Surprises for your Soulmate.</p>
             <button class="cta-btn" onclick="document.getElementById('pricing').scrollIntoView()">Create A Memory</button>
         </section>
 
         <section id="pricing" class="pricing-section">
-            <h2 style="text-align:center; font-family:'Dancing Script'; font-size:3.5rem;">The Collections</h2>
             <div class="pricing-grid">
                 <div class="card">
                     <h3>Trial</h3>
                     <div class="price">₹49</div>
-                    <p>15 Days Access</p>
-                    <button class="cta-btn" style="padding:10px 30px; animation:none;" onclick="setPlan('15', 49)">Select</button>
+                    <p>15 Days</p>
+                    <button class="cta-btn" onclick="setPlan('15', 49)">Select</button>
                 </div>
-                <div class="card" style="border-color:var(--accent); background:rgba(255, 45, 117, 0.05);">
-                    <h3 style="color:var(--accent);">Classic</h3>
+                <div class="card" style="border: 2px solid var(--accent)">
+                    <h3>Classic</h3>
                     <div class="price">₹99</div>
-                    <p>30 Days Access</p>
-                    <button class="cta-btn" style="padding:10px 30px; animation:none;" onclick="setPlan('30', 99)">Select</button>
-                </div>
-                <div class="card">
-                    <h3>Infinite</h3>
-                    <div class="price">₹149</div>
-                    <p>Permanent Link</p>
-                    <button class="cta-btn" style="padding:10px 30px; animation:none;" onclick="setPlan('8899', 149)">Select</button>
+                    <p>30 Days</p>
+                    <button class="cta-btn" onclick="setPlan('30', 99)">Select</button>
                 </div>
             </div>
         </section>
 
         <section id="setup-section">
             <div class="form-container">
-                <h2 style="font-family:'Dancing Script'; font-size:2.5rem; text-align:center; margin-top:0; color:var(--accent);">Personalize</h2>
+                <h2 style="text-align:center; color:var(--accent);">Personalize</h2>
                 <input type="text" id="in-name" placeholder="Partner's Name *" required>
-                <input type="text" id="in-nick" placeholder="A sweet nickname">
-                <input type="date" id="in-date" title="Anniversary">
-                <label style="font-size: 0.8rem; color:#666;">Upload Photo *</label>
+                <input type="text" id="in-nick" placeholder="Nickname">
+                <input type="date" id="in-date">
+                <label style="font-size:12px">Photo *</label>
                 <input type="file" id="in-pic" accept="image/*" required>
                 <input type="hidden" id="selected-plan" value="15">
                 <input type="hidden" id="selected-price" value="49">
-                <button class="cta-btn" style="width:100%; margin-top:10px; animation:none;" onclick="generate()">Generate Link</button>
-                <p style="font-size: 0.6rem; color:#999; text-align:center;">Secure Fampay Checkout</p>
+                <button class="cta-btn" style="width:100%" onclick="generate()">Generate & Pay</button>
             </div>
         </section>
     </div>
 
-    <div id="expiry-screen">
-        <h1 style="font-family:'Dancing Script'; font-size:4.5rem; color:var(--accent); margin:0;">Locked Forever?</h1>
-        <p>This memory has expired. Keep it alive permanently.</p>
-        <div style="background:rgba(255,255,255,0.05); padding:40px; border-radius:30px; border:1px solid #333; margin:30px 0;">
-            <p>Upgrade to Infinite: <b>₹149</b></p>
-            <a id="pay-link-expiry" href="#" class="pay-btn">Pay with Fampay</a>
-            <p style="font-size:0.7rem; color:#666; margin-top:15px;">Pay & send screenshot to 9323229762@fam</p>
+    <div id="approval-screen">
+        <h2 style="color:var(--accent); font-family:'Dancing Script'; font-size:3rem;">Payment Pending</h2>
+        <p>Your link has been generated and copied!</p>
+        <div style="background:rgba(255,255,255,0.1); padding:20px; border-radius:20px; margin:20px;">
+            <p style="font-size:14px;">1. Pay the amount via the opened app.<br>2. Send the Screenshot + Your Link to activate.</p>
+            <button class="cta-btn" id="whatsapp-btn">Send Screenshot to Activate</button>
         </div>
+        <button onclick="location.reload()" style="background:none; border:none; color:white; text-decoration:underline; cursor:pointer;">Create another</button>
+    </div>
+
+    <div id="expiry-screen">
+        <h1>Link Expired</h1>
+        <p>Please contact the creator to renew.</p>
     </div>
 
     <div id="final-memory-site">
         <div id="cover-overlay" onclick="revealSite()">
             <div class="polaroid">
-                <img id="pol-display" class="pol-img" src="" alt="Us">
-                <p id="pol-text" style="font-family:'Dancing Script'; font-size:2.2rem; margin:15px 0 0;">For You</p>
-                <small>(Tap to Unfold Our Story)</small>
+                <img id="pol-display" class="pol-img" src="">
+                <p id="pol-text" style="font-family:'Dancing Script'; font-size:2rem; margin:10px 0 0;"></p>
+                <small>Tap to Open</small>
             </div>
         </div>
-
         <div class="memory-content">
-            <h1 id="main-title" style="font-family:'Dancing Script'; font-size:5rem; margin:0; color:var(--accent);">I Love You</h1>
-            <p id="sub-title" style="letter-spacing:5px; text-transform:uppercase; font-size:0.8rem; opacity:0.7;">Forever and Always</p>
-
-            <div class="timer-container" id="timer-ui">
+            <h1 style="font-family:'Dancing Script'; font-size:4rem; color:var(--accent);">I Love You</h1>
+            <div class="timer-container">
                 <div class="timer-box"><span id="d">0</span>Days</div>
                 <div class="timer-box"><span id="h">0</span>Hrs</div>
                 <div class="timer-box"><span id="m">0</span>Min</div>
                 <div class="timer-box"><span id="s">0</span>Sec</div>
             </div>
-
-            <div class="glass-note">
-                <p id="message-body"></p>
-            </div>
-            
-            <p style="margin-top:100px; font-size:0.7rem; opacity:0.4; letter-spacing:2px;">© 2026 EVERLOVE PRO GOLD</p>
+            <div class="glass-note"><p id="message-body"></p></div>
         </div>
     </div>
 
@@ -154,13 +137,12 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const MASTER = "8899";
         const MY_UPI = "9323229762@fam";
 
         window.onload = () => {
             if (urlParams.has('n')) {
                 document.getElementById('landing-page').style.display = 'none';
-                validate();
+                show();
             }
         };
 
@@ -170,23 +152,11 @@
             document.getElementById('setup-section').scrollIntoView();
         }
 
-        function validate() {
-            const p = urlParams.get('p');
-            const ts = parseInt(urlParams.get('ts'));
-            if (p !== MASTER && (new Date().getTime() - ts > p * 24 * 60 * 60 * 1000)) {
-                document.getElementById('expiry-screen').style.display = 'flex';
-                // Link the pay button for expiry
-                document.getElementById('pay-link-expiry').href = `upi://pay?pa=${9323229762@fam}&pn=EverLovePro&am=149&cu=INR`;
-                return;
-            }
-            show();
-        }
-
         function generate() {
             const n = document.getElementById('in-name').value;
             const f = document.getElementById('in-pic').files[0];
             const price = document.getElementById('selected-price').value;
-            if (!n || !f) return alert("Photo and Name are required!");
+            if (!n || !f) return alert("Required fields missing!");
 
             const r = new FileReader();
             r.onloadend = () => {
@@ -199,24 +169,32 @@
 
                 sessionStorage.setItem('c_img', r.result);
                 const link = window.location.origin + window.location.pathname + '?' + p.toString();
+                
+                // Copy link
                 navigator.clipboard.writeText(link);
                 
-                // Redirect to Fampay Payment
-                const payUrl = `upi://pay?pa=${9323229762@fam}&pn=EverLovePro&am=${price}&cu=INR`;
-                alert("Redirecting to Fampay for Activation...");
+                // Setup WhatsApp Redirect for Manual Approval
+                const waMessage = encodeURIComponent("Hey, I just paid for EverLove Pro! Please activate my link: " + link);
+                document.getElementById('whatsapp-btn').onclick = () => {
+                    window.open("https://wa.me/919323229762?text=" + waMessage);
+                };
+
+                // Trigger UPI
+                const payUrl = "upi://pay?pa=" + MY_UPI + "&pn=EverLovePro&am=" + price + "&cu=INR";
                 window.location.href = payUrl;
-                
-                // Wait a bit then refresh to show the result
-                setTimeout(() => { window.location.search = p.toString(); }, 3000);
+
+                // Show Approval Screen
+                document.getElementById('landing-page').style.display = 'none';
+                document.getElementById('approval-screen').style.display = 'flex';
             };
             r.readAsDataURL(f);
         }
 
         function show() {
-            const n = urlParams.get('n'), nk = urlParams.get('nk'), d = urlParams.get('d');
+            const nk = urlParams.get('nk'), d = urlParams.get('d');
             document.getElementById('final-memory-site').style.display = 'block';
-            document.getElementById('pol-text').innerText = `For ${nk}`;
-            document.getElementById('message-body').innerText = `To my dearest ${nk}, this is a digital sanctuary for our love. No matter where life takes us, this page remains a testament to the magic we share. Every second with you is my favorite second.`;
+            document.getElementById('pol-text').innerText = "For " + nk;
+            document.getElementById('message-body').innerText = "To my dearest " + nk + ", every moment with you is a treasure. This page is a small reminder of how much you mean to me.";
 
             if(d) {
                 setInterval(() => {
@@ -232,18 +210,17 @@
         }
 
         function revealSite() {
-            document.getElementById('cover-overlay').style.transform = 'translateY(-100%)';
+            document.getElementById('cover-overlay').style.opacity = '0';
+            setTimeout(() => document.getElementById('cover-overlay').style.display = 'none', 1500);
             document.getElementById('bg-music').play();
-            for(let i=0; i<40; i++) {
+            for(let i=0; i<30; i++) {
                 setTimeout(() => {
                     const h = document.createElement("div");
-                    h.classList.add("heart");
-                    h.innerHTML = "❤️";
+                    h.className = "heart"; h.innerHTML = "❤️";
                     h.style.left = Math.random() * 100 + "vw";
-                    h.style.fontSize = (Math.random()*20 + 10) + "px";
                     document.body.appendChild(h);
-                    setTimeout(() => h.remove(), 7000);
-                }, i * 300);
+                    setTimeout(() => h.remove(), 6000);
+                }, i * 200);
             }
         }
     </script>
